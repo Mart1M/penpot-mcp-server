@@ -1,11 +1,11 @@
 {
-  "name": "@martinm/penpot-mcp-server",
+  "name": "penpot-mcp-server",
   "version": "1.0.0",
   "description": "MCP Server for Penpot integration",
   "main": "index.js",
   "type": "module",
   "bin": {
-    "penpot-mcp-server": "./index.js"
+    "penpot-mcp-server": "index.js"
   },
   "scripts": {
     "start": "node index.js",
@@ -28,7 +28,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/martinm/penpot-mcp-server"
+    "url": "git+https://github.com/martinm/penpot-mcp-server.git"
   },
   "homepage": "https://github.com/martinm/penpot-mcp-server",
   "publishConfig": {

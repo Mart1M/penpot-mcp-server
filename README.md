@@ -2,23 +2,21 @@
 
 A Model Context Protocol (MCP) server for integrating Penpot with AI assistants.
 
-## Installation
+## Installation & Publishing
 
+### For development
 ```bash
 npm install
-```
-
-## Usage
-
-### Start the server
-```bash
 npm start
 ```
 
-### Test with MCP inspector
+### For publishing to npm
 ```bash
-npm test
+npm publish
 ```
+
+### For users (via npx)
+No installation needed - use directly with npx in your MCP configuration.
 
 ## Configuration
 
@@ -79,7 +77,7 @@ Add this configuration to your MCP client:
       "command": "npx",
       "args": [
         "-y",
-        "@martinm/penpot-mcp-server@latest"
+        "penpot-mcp-server@latest"
       ],
       "env": {
         "PENPOT_ACCESS_TOKEN": "your_penpot_token_here"
