@@ -1,0 +1,37 @@
+{
+  "name": "@martinm/penpot-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP Server for Penpot integration",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "penpot-mcp-server": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "npx @modelcontextprotocol/inspector node index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "latest"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/inspector": "latest"
+  },
+  "keywords": [
+    "mcp",
+    "penpot",
+    "design",
+    "tailwind"
+  ],
+  "author": "martinm",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/martinm/penpot-mcp-server"
+  },
+  "homepage": "https://github.com/martinm/penpot-mcp-server",
+  "publishConfig": {
+    "access": "public"
+  }
+}
