@@ -1,7 +1,7 @@
 # Penpot MCP Server
 
 <div align="center">
-  <img src="assets/logo.png" alt="Penpot MCP Server Logo" width="200" height="133">
+  <img src="assets/logo.png" alt="Penpot MCP Server Logo" width="200" height="200">
 </div>
 
 A Model Context Protocol (MCP) server for integrating Penpot with AI assistants.
