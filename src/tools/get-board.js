@@ -92,19 +92,21 @@ export class GetBoardTool {
   convertBasicProperties(obj) {
     const classes = [];
 
-    if (obj.x !== undefined && obj.y !== undefined) {
-      if (obj.type !== "frame" || obj.layoutItemAbsolute === true) {
-        classes.push("absolute");
-        classes.push(`left-[${obj.x}px]`);
-        classes.push(`top-[${obj.y}px]`);
-      }
+    if (
+      obj.x !== undefined &&
+      obj.y !== undefined &&
+      obj.layoutItemAbsolute === true
+    ) {
+      classes.push("absolute");
+      classes.push(`left-[${obj.x}px]`);
+      classes.push(`top-[${obj.y}px]`);
     }
 
     if (obj.growType !== "auto-width") {
-      if (obj.width !== undefined) {
+      if (obj.width !== undefined && obj.layoutItemHSizing !== "auto") {
         classes.push(`w-[${obj.width}px]`);
       }
-      if (obj.height !== undefined) {
+      if (obj.height !== undefined && obj.layoutItemVSizing !== "auto") {
         classes.push(`h-[${obj.height}px]`);
       }
     }
@@ -336,7 +338,9 @@ export class GetBoardTool {
 
     if (obj.children && Object.keys(obj.children).length > 0) {
       html += "\n";
-      for (const [childId, child] of Object.entries(obj.children)) {
+      const childrenEntries = Object.entries(obj.children);
+      for (let i = childrenEntries.length - 1; i >= 0; i--) {
+        const [childId, child] = childrenEntries[i];
         html += this.generateHTML(child, depth + 1);
       }
       html += `${indent}`;
