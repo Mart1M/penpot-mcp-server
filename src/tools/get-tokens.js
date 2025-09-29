@@ -22,13 +22,10 @@ export class GetTokensTool {
     };
   }
 
-  // Convertit les tokens Penpot au format DTCG
   convertToDTCG(tokensLib) {
     const dtcgTokens = {};
 
-    // Traiter chaque collection de tokens
     for (const [collectionName, tokens] of Object.entries(tokensLib)) {
-      // Ignorer les métadonnées spéciales
       if (collectionName.startsWith("$")) continue;
 
       dtcgTokens[collectionName] = {};
@@ -49,7 +46,6 @@ export class GetTokensTool {
       }
     }
 
-    // Ajouter les métadonnées si elles existent
     if (tokensLib.$themes) {
       dtcgTokens.$themes = tokensLib.$themes.map((theme) => ({
         name: theme.name,
@@ -62,11 +58,9 @@ export class GetTokensTool {
     return dtcgTokens;
   }
 
-  // Convertit la valeur du token selon son type
   convertTokenValue(value, type) {
     switch (type) {
       case "color":
-        // Convertir rgb(r, g, b) en format hex si nécessaire
         if (typeof value === "string" && value.startsWith("rgb(")) {
           const rgbMatch = value.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
           if (rgbMatch) {
@@ -81,14 +75,12 @@ export class GetTokensTool {
       case "borderRadius":
       case "spacing":
       case "dimension":
-        // Assurer que les valeurs numériques ont une unité
         if (typeof value === "string" && !isNaN(value)) {
           return `${value}px`;
         }
         return value;
 
       case "fontWeight":
-        // Convertir les poids de police en nombres si nécessaire
         const weightMap = {
           thin: "100",
           extralight: "200",
@@ -107,7 +99,6 @@ export class GetTokensTool {
     }
   }
 
-  // Mappe les types de tokens Penpot vers DTCG
   mapTokenType(penpotType) {
     const typeMap = {
       borderRadius: "dimension",
@@ -127,15 +118,12 @@ export class GetTokensTool {
     return typeMap[penpotType] || penpotType;
   }
 
-  // Génère les variables CSS à partir des tokens actifs
   generateCSSVariables(dtcgTokens) {
     let cssVariables = ":root {\n";
 
-    // Identifier les collections actives
     const activeSets = dtcgTokens.$metadata?.activeSets || [];
 
     if (activeSets.length === 0) {
-      // Si aucune collection active spécifiée, utiliser la première disponible
       const collections = Object.keys(dtcgTokens).filter(
         (key) => !key.startsWith("$")
       );
@@ -144,7 +132,6 @@ export class GetTokensTool {
       }
     }
 
-    // Générer les variables CSS pour les collections actives
     for (const setName of activeSets) {
       if (dtcgTokens[setName]) {
         for (const [tokenName, tokenData] of Object.entries(
@@ -196,7 +183,6 @@ export class GetTokensTool {
         throw new Error("file-id missing from URL");
       }
 
-      // Appeler l'API get-file avec l'ID du fichier
       const fileParams = {
         id: params.fileId,
       };
@@ -208,7 +194,6 @@ export class GetTokensTool {
       );
       const fileData = this.mcpServer.convertTransitToCleanJson(rawFile);
 
-      // Extraire et convertir les tokens
       let result = null;
 
       if (fileData && fileData.data && fileData.data.tokensLib) {

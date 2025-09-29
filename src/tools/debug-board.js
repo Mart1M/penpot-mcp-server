@@ -7,14 +7,14 @@ export class DebugBoardTool {
     return {
       name: "debug_board",
       description:
-        "Récupère un board Penpot et affiche le JSON brut pour debug",
+        "Retrieves a Penpot board and displays raw JSON for debugging",
       inputSchema: {
         type: "object",
         properties: {
           url: {
             type: "string",
             description:
-              "URL complète du board Penpot (ex: https://design.penpot.app/#/workspace?team-id=...&board-id=...)",
+              "Complete Penpot board URL (ex: https://design.penpot.app/#/workspace?team-id=...&board-id=...)",
           },
         },
         required: ["url"],
@@ -22,14 +22,12 @@ export class DebugBoardTool {
     };
   }
 
-  // Fonction récursive pour collecter un objet et ses enfants
   collectObjectAndChildren(objectId, objects) {
     const obj = objects[objectId];
     if (!obj) return null;
 
     const result = { ...obj };
 
-    // Si l'objet a des enfants (shapes), les collecter récursivement
     if (obj.shapes && Array.isArray(obj.shapes)) {
       result.children = {};
       for (const childId of obj.shapes) {
@@ -77,18 +75,17 @@ export class DebugBoardTool {
       const params = this.mcpServer.parseUrlParams(url);
 
       if (!params.fileId) {
-        throw new Error("file-id manquant dans l'URL");
+        throw new Error("file-id missing from URL");
       }
 
       if (!params.pageId) {
-        throw new Error("page-id manquant dans l'URL");
+        throw new Error("page-id missing from URL");
       }
 
       if (!params.boardId) {
-        throw new Error("board-id manquant dans l'URL");
+        throw new Error("board-id missing from URL");
       }
 
-      // Utiliser board-id comme object-id pour récupérer seulement cet objet
       const pageParams = {
         "file-id": params.fileId,
         "page-id": params.pageId,
@@ -102,7 +99,6 @@ export class DebugBoardTool {
       );
       const pageData = this.mcpServer.convertTransitToCleanJson(rawPage);
 
-      // Extraire l'objet board et tous ses enfants pour debug
       let result = null;
 
       if (pageData && pageData.objects && pageData.objects[params.boardId]) {
@@ -119,14 +115,14 @@ export class DebugBoardTool {
       } else if (pageData && pageData.objects) {
         result = {
           debug: true,
-          error: `Objet avec board-id ${params.boardId} non trouvé dans la page`,
+          error: `Object with board-id ${params.boardId} not found in page`,
           allObjects: pageData.objects,
           params: params,
         };
       } else {
         result = {
           debug: true,
-          error: "Aucuns objets trouvés dans la page",
+          error: "No objects found in page",
           rawResponse: pageData,
           params: params,
         };

@@ -45,7 +45,7 @@ class PenpotMCPServer {
         return config.accessToken;
       }
     } catch (error) {
-      console.error('Erreur lors du chargement de la configuration:', error.message);
+      console.error('Error loading configuration:', error.message);
     }
     return process.env.PENPOT_ACCESS_TOKEN || null;
   }
@@ -88,7 +88,7 @@ class PenpotMCPServer {
       const [path, queryString] = hash.split('?');
       
       if (!queryString) {
-        throw new Error('URL invalide: paramètres manquants');
+        throw new Error('Invalid URL: missing parameters');
       }
 
       const params = new URLSearchParams(queryString);
@@ -101,7 +101,7 @@ class PenpotMCPServer {
         layout: params.get('layout'),
       };
     } catch (error) {
-      throw new Error(`Erreur lors du parsing de l'URL: ${error.message}`);
+      throw new Error(`URL parsing error: ${error.message}`);
     }
   }
 
@@ -175,7 +175,7 @@ class PenpotMCPServer {
   async run() {
     const transport = new StdioServerTransport();
     await this.server.connect(transport);
-    console.error('Serveur MCP Penpot démarré sur stdio');
+    console.error('Penpot MCP Server started on stdio');
   }
 }
 
