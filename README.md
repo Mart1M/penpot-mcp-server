@@ -20,13 +20,15 @@ No installation needed - use directly with npx in your MCP configuration.
 
 ## Configuration
 
-### Penpot Access Token
-To use the Penpot API, you need to configure an access token:
+### Penpot Configuration
+To use the Penpot API, you need to configure:
 
-1. Log in to Penpot
-2. Go to Profile > Access tokens
-3. Create a new token with a descriptive name
-4. Add it to the `PENPOT_ACCESS_TOKEN` environment variable in your MCP configuration
+1. **Access Token**: Log in to Penpot → Profile → Access tokens → Create new token
+2. **API URL** (optional): For self-hosted Penpot instances
+
+Add both to your MCP configuration environment variables:
+- `PENPOT_ACCESS_TOKEN`: Your access token
+- `PENPOT_API_URL`: API base URL (defaults to `https://design.penpot.app/api`)
 
 ## Available Tools
 
@@ -51,6 +53,7 @@ Retrieves design tokens from a Penpot file.
 - `url` (string, required): Complete Penpot file URL (only needs `file-id`)
 
 **Returns:** DTCG formatted tokens, CSS variables, and summary
+
 
 ## Project Structure
 
@@ -80,7 +83,8 @@ Add this configuration to your MCP client:
         "penpot-mcp-server@latest"
       ],
       "env": {
-        "PENPOT_ACCESS_TOKEN": "your_penpot_token_here"
+        "PENPOT_ACCESS_TOKEN": "your_penpot_token_here",
+        "PENPOT_API_URL": "https://design.penpot.app/api"
       }
     }
   }
@@ -96,7 +100,8 @@ Or for local development:
       "command": "node",
       "args": ["/path/to/penpot-mcp/index.js"],
       "env": {
-        "PENPOT_ACCESS_TOKEN": "your_penpot_token_here"
+        "PENPOT_ACCESS_TOKEN": "your_penpot_token_here",
+        "PENPOT_API_URL": "https://design.penpot.app/api"
       }
     }
   }

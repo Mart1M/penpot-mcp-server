@@ -106,7 +106,8 @@ class PenpotMCPServer {
   }
 
   async makeApiRequest(endpoint, params, token, acceptFormat = 'application/json') {
-    const apiUrl = 'https://design.penpot.app/api/rpc/command/' + endpoint;
+    const baseApiUrl = process.env.PENPOT_API_URL || 'https://design.penpot.app/api';
+    const apiUrl = `${baseApiUrl}/rpc/command/${endpoint}`;
     
     const response = await fetch(apiUrl, {
       method: 'POST',
