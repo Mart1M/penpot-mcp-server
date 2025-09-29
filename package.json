@@ -24,13 +24,13 @@
     "design",
     "tailwind"
   ],
-  "author": "martinm",
+  "author": "mart1m",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/martinm/penpot-mcp-server.git"
+    "url": "git+https://github.com/Mart1M/penpot-mcp-server.git"
   },
-  "homepage": "https://github.com/martinm/penpot-mcp-server",
+  "homepage": "https://github.com/Mart1M/penpot-mcp-server",
   "publishConfig": {
     "access": "public"
   }
